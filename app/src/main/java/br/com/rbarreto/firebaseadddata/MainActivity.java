@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.firebase.FirebaseApp;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> lista = new ArrayList<String>();
     private ArrayAdapter<String> arrayAdapter;
     private ListView listView;
+    private EditText editTextTarefa;
 
 
     @Override
@@ -35,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
+        editTextTarefa = findViewById(R.id.editTextTarefa);
         conectarBanco();
         eventoBanco();
+
     }
 
     public void eventoBanco(){
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                 arrayAdapter = new MeuAdapater(MainActivity.this, (ArrayList<String>) lista);
                 listView.setAdapter(arrayAdapter);
+
             }
 
             @Override
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void salvarTarefa(View view){
-        String info = "data";
+        String info = editTextTarefa.getText().toString();
         databaseReference.child("Tarefa").child(UUID.randomUUID().toString()).child("info").setValue(info);
     }
 }

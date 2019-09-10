@@ -16,7 +16,7 @@ import br.com.rbarreto.firebaseadddata.R;
 public class MeuAdapater extends ArrayAdapter {
 
     public Context context;
-    private List<String> lista = new ArrayList<>();
+    private List<String> lista;
 
     public MeuAdapater(Context context, ArrayList<String> lista){
         super(context, 0, lista);
